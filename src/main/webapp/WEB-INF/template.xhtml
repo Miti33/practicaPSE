@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>PetAdopt - Plataforma de Adopción</title>
+    <link href="#{request.contextPath}/resources/css/default.css" rel="stylesheet" />
+</h:head>
+
+<h:body>
+    <h:form>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="80" styleClass="ui-widget-header" resizable="false" closable="false" collapsible="false">
+                <h2>🐾 PetAdopt - Plataforma de Adopción de Mascotas</h2>
+                <h:panelGroup layout="block" style="float:right; margin-top:-40px;">
+                    
+                    <p:commandButton value="Iniciar Sesión" icon="pi pi-sign-in" action="/login.xhtml" rendered="#{!userSession.loggedIn}" />
+                    <p:commandButton value="Registrarse" icon="pi pi-user-plus" action="/register.xhtml" rendered="#{!userSession.loggedIn}" />
+                    <p:commandButton value="Cerrar Sesión" icon="pi pi-sign-out" action="#{userSession.logout}" rendered="#{userSession.loggedIn}" />
+                  
+                </h:panelGroup>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="220" header="Navegación" collapsible="true">
+                <p:menu>
+                    
+                    <p:menuitem value="Inicio" outcome="index.xhtml" icon="pi pi-home" />
+                    <p:menuitem value="Refugios" icon="pi pi-users" />
+                    <p:menuitem value="Mascotas" icon="pi pi-paw" />
+                    <p:menuitem value="Solic
+                                itudes" icon="pi pi-inbox" />
+                    <p:menuitem value="Administración" icon="pi pi-cog" />
+                   
+                </p:menu>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="content"/>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:form>
+</h:body>
+
+</html>
