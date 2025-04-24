@@ -1,0 +1,17 @@
+com\mycompany\practicafinalpse\entities\Mascota_.class
+com\mycompany\practicafinalpse\entities\Solicitud.class
+com\mycompany\practicafinalpse\rest\MascotaFacadeREST.class
+com\mycompany\practicafinalpse\entities\Usuario.class
+com\mycompany\practicafinalpse\rest\UsuarioFacadeREST.class
+com\mycompany\practicafinalpse\entities\Mascota.class
+com\mycompany\practicafinalpse\entities\Cliente.class
+com\mycompany\practicafinalpse\entities\Cliente_.class
+com\mycompany\practicafinalpse\entities\Refugio.class
+com\mycompany\practicafinalpse\entities\Solicitud_.class
+com\mycompany\practicafinalpse\rest\ClienteFacadeREST.class
+com\mycompany\practicafinalpse\entities\Usuario_.class
+com\mycompany\practicafinalpse\rest\SolicitudFacadeREST.class
+com\mycompany\practicafinalpse\rest\ApplicationConfig.class
+com\mycompany\practicafinalpse\entities\Refugio_.class
+com\mycompany\practicafinalpse\rest\AbstractFacade.class
+com\mycompany\practicafinalpse\rest\RefugioFacadeREST.class
