@@ -36,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mascota.findByEdad", query = "SELECT m FROM Mascota m WHERE m.edad = :edad"),
     @NamedQuery(name = "Mascota.findByEstadoSalud", query = "SELECT m FROM Mascota m WHERE m.estadoSalud = :estadoSalud"),
     @NamedQuery(name = "Mascota.findByCosteAdopcion", query = "SELECT m FROM Mascota m WHERE m.costeAdopcion = :costeAdopcion"),
-    @NamedQuery(name = "Mascota.findByDescripcion", query = "SELECT m FROM Mascota m WHERE m.descripcion = :descripcion")})
+    @NamedQuery(name = "Mascota.findByDescripcion", query = "SELECT m FROM Mascota m WHERE m.descripcion = :descripcion"),
+    @NamedQuery(name = "Mascota.findByImagen_url", query = "SELECT m FROM Mascota m WHERE m.imagenUrl = :imagenUrl"),
+    @NamedQuery(name = "Mascota.findByEmail", query = "SELECT m FROM Mascota m WHERE m.email = :email")})
 public class Mascota implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +71,13 @@ public class Mascota implements Serializable {
     @Size(max = 255)
     @Column(name = "descripcion")
     private String descripcion;
+    @Size(max = 255)
+    @Column(name = "imagen_url")
+    private String imagenUrl;
+    @Size(max = 100)
+    @Column(name = "email")
+    private String email;
+    
 
     public Mascota() {
     }
@@ -171,5 +180,23 @@ public class Mascota implements Serializable {
     public String toString() {
         return "com.mycompany.practicafinalpse.entities.Mascota[ id=" + id + " ]";
     }
-    
+
+    public void setCosteAdopcion(double costeAdopcion) {
+        this.costeAdopcion = BigDecimal.valueOf(costeAdopcion);
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="formMascota" style="width:600px; margin:auto; margin-top:40px;">
+
+                    <h2>🐶 Añadir Nueva Mascota</h2>
+
+                    <!-- Mensajes (ahora actualizados manualmente) -->
+                    <p:messages id="mensajes" />
+
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <p:inputText id="nombre" value="#{mascotaBean.nombre}" required="true"/>
+
+                        <h:outputLabel for="especie" value="Especie:" />
+                        <p:inputText id="especie" value="#{mascotaBean.especie}" required="true"/>
+
+                        <h:outputLabel for="raza" value="Raza:" />
+                        <p:inputText id="raza" value="#{mascotaBean.raza}" />
+
+                        <h:outputLabel for="edad" value="Edad:" />
+                        <p:spinner id="edad" value="#{mascotaBean.edad}" min="0" required="true"/>
+
+                        <h:outputLabel for="estado" value="Estado de Salud:" />
+                        <p:inputTextarea id="estado" value="#{mascotaBean.estadoSalud}" autoResize="true" required="true"/>
+
+                        <h:outputLabel for="coste" value="Coste de Adopción (€):" />
+                        <p:inputNumber id="coste" value="#{mascotaBean.costeAdopcion}" minValue="0" symbol=" €" required="true"/>
+
+                        <h:outputLabel for="descripcion" value="Descripción:" />
+                        <p:inputTextarea id="descripcion" value="#{mascotaBean.descripcion}" autoResize="true"/>
+
+                        <h:outputLabel for="imagen" value="URL Imagen:" />
+                        <p:inputText id="imagen" value="#{mascotaBean.imagenUrl}" required="true"/>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Guardar Mascota" action="#{mascotaClientBean.addMascota}" update="formMascota mensajes" ajax="false" style="margin-top:15px;" />
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+    </body>
+</html>

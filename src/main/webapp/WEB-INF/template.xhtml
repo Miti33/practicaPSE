@@ -4,49 +4,49 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    
-    
-    
-    
-<h:head>
-    <meta charset="UTF-8" />
-    <title>PetAdopt - Plataforma de Adopción</title>
-    <link href="#{request.contextPath}/resources/css/default.css" rel="stylesheet" />
-</h:head>
+    <h:head>
+        <meta charset="UTF-8" />
+        <title>PetAdopt - Plataforma de Adopción</title>
+        <h:outputStylesheet library="css" name="default.css" />
+    </h:head>
 
-<h:body>
-    <h:form>
-        <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="80" styleClass="ui-widget-header" resizable="false" closable="false" collapsible="false">
-                <h2>🐾 PetAdopt - Plataforma de Adopción de Mascotas</h2>
-                <h:panelGroup layout="block" style="float:right; margin-top:-40px;">
-                    
-                    <p:commandButton value="Iniciar Sesión" icon="pi pi-sign-in" action="/login.xhtml" rendered="#{!userSession.loggedIn}" />
-                    <p:commandButton value="Registrarse" icon="pi pi-user-plus" action="/register.xhtml" rendered="#{!userSession.loggedIn}" />
-                    <p:commandButton value="Cerrar Sesión" icon="pi pi-sign-out" action="#{userSession.logout}" rendered="#{userSession.loggedIn}" />
-                  
-                </h:panelGroup>
-            </p:layoutUnit>
+    <h:body>
+        <h:form>
+            <p:layout fullPage="true">
+                <!-- Cabecera -->
+                <p:layoutUnit position="north" size="70" resizable="false" closable="false" collapsible="false">
+                    <div class="header-bar">
+                        <div class="header-title">
+                            🐾 PetAdopt - Plataforma de Adopción
+                        </div>
+                        <div class="nav-buttons">
+                            <p:commandButton value="Iniciar Sesión" icon="pi pi-sign-in" action="/login.xhtml" rendered="#{!userSession.loggedIn}" />
+                            <p:commandButton value="Registrarse" icon="pi pi-user-plus" action="/register.xhtml" rendered="#{!userSession.loggedIn}" />
+                            <p:commandButton value="Cerrar Sesión" icon="pi pi-sign-out" action="#{userSession.logout}" rendered="#{userSession.loggedIn}" />
+                        </div>
+                    </div>
+                </p:layoutUnit>
 
-            <p:layoutUnit position="west" size="220" header="Navegación" collapsible="true">
-                <p:menu>
-                    
-                    <p:menuitem value="Inicio" outcome="index.xhtml" icon="pi pi-home" />
-                    <p:menuitem value="Refugios" icon="pi pi-users" />
-                    <p:menuitem value="Mascotas" icon="pi pi-paw" />
-                    <p:menuitem value="Solic
-                                itudes" icon="pi pi-inbox" />
-                    <p:menuitem value="Administración" icon="pi pi-cog" />
-                   
-                </p:menu>
-            </p:layoutUnit>
+                <!-- Menú lateral -->
+                <p:layoutUnit position="west" size="230" header="Navegación" collapsible="true">
+                    <p:menu styleClass="custom-menu">
+                        <p:menuitem value="Inicio" outcome="/index.xhtml" icon="pi pi-home" />
+                        <p:menuitem value="Mascotas" action="verMascota" icon="pi pi-paw" />
+                        <p:menuitem value="Refugio" action="refugio/refugio.xhtml" icon="pi pi-users" />
+                        <p:menuitem value="Añadir Mascota" action="aniadirMascota/aniadirMascota.xhtml" icon="pi pi-users" />
+                        <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{userSession.admin}" />
+                    </p:menu>
+                </p:layoutUnit>
 
-            <p:layoutUnit position="center">
-                <ui:insert name="content"/>
-            </p:layoutUnit>
+                <!-- Contenido dinámico -->
+                <p:layoutUnit position="center">
+                    <div class="center-content">
+                        <ui:insert name="content"/>
+                    </div>
+                </p:layoutUnit>
 
-        </p:layout>
-    </h:form>
-</h:body>
+            </p:layout>
+        </h:form>
+    </h:body>
 
 </html>

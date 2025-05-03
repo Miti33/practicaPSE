@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h:form id="refugioForm">
+                    <!-- Título -->
+                    <h2>📋 Gestión de Refugio</h2>
+                    <h3>📥 Solicitudes de adopción pendientes</h3>
+
+                    <p:scrollPanel style="height:400px; margin-top:10px;">
+                        <ui:repeat value="#{refugioBean.solicitudesPendientes}" var="solicitud">
+                            <p:panel header="Solicitud de #{solicitud.mascotaNombre}" style="margin-bottom:15px;">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Mascota:" />
+                                    <h:outputText value="#{solicitud.mascotaNombre}" />
+
+                                    <h:outputText value="Especie:" />
+                                    <h:outputText value="#{solicitud.especie}" />
+
+                                    <h:outputText value="Solicitante:" />
+                                    <h:outputText value="#{solicitud.clienteEmail}" />
+
+                                    <h:outputText value="Fecha de solicitud:" />
+                                    <h:outputText value="#{solicitud.fechaSolicitud}" />
+                                </h:panelGrid>
+
+                                <p:commandButton value="Aceptar" icon="pi pi-check"
+                                                 action="#{refugioBean.aceptarSolicitud(solicitud.id)}"
+                                                 update="@form" styleClass="ui-button-success" />
+
+                                <p:spacer width="10" />
+
+                                <p:commandButton value="Rechazar" icon="pi pi-times"
+                                                 action="#{refugioBean.rechazarSolicitud(solicitud.id)}"
+                                                 update="@form" styleClass="ui-button-danger" />
+                            </p:panel>
+                        </ui:repeat>
+                    </p:scrollPanel>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
