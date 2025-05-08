@@ -62,5 +62,29 @@ public class verMascota implements Serializable {
     public String confirmarAdopcion() {
         return "confirmado";
     }
+
+    public String getImagenUrl() {
+        return imagenUrl;
+    }
+
+    public void setImagenUrl(String imagenUrl) {
+        this.imagenUrl = imagenUrl;
+    }
+
+    public EntityManager getEm() {
+        return em;
+    }
+
+    public void setEm(EntityManager em) {
+        this.em = em;
+    }
+
+    public MascotaFacadeREST getMascotaService() {
+        return mascotaService;
+    }
+
+    public void setMascotaService(MascotaFacadeREST mascotaService) {
+        this.mascotaService = mascotaService;
+    }
 }
 

@@ -3,14 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-
-    <body>
+      xmlns:p="http://primefaces.org/ui">
 
         <ui:composition template="./../WEB-INF/template.xhtml">
             <ui:define name="content">
-                <h2 style="text-align:center; margin-bottom: 1rem;">Detalles de <span style="color:teal">#{verMascota.nombre}</span></h2>
                 <h:form id="formDetalles">
                     <p:panelGrid columns="2" columnClasses="label,value" styleClass="ui-panelgrid-blank" style="width:60%;margin:auto;">
                         <h:outputText value="Nombre:" />
@@ -32,11 +28,9 @@
 
                     <div style="text-align:center; margin-top:2rem;">
                         <p:commandButton value="Confirmar Adopción" action="confirmar" icon="pi pi-check" styleClass="p-button-success p-mr-2" />
-                        <p:commandButton value="Volver" action="mascotas" icon="pi pi-arrow-left" styleClass="p-button-secondary" immediate="true" />
+                        <p:commandButton value="Volver" action="verMascota" icon="pi pi-arrow-left" styleClass="p-button-secondary" immediate="true" />
                     </div>
                 </h:form>
             </ui:define>
         </ui:composition>
-
-    </body>
 </html>

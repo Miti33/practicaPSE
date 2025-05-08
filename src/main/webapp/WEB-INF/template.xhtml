@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta charset="UTF-8" />
@@ -11,42 +12,46 @@
     </h:head>
 
     <h:body>
-        <h:form>
-            <p:layout fullPage="true">
-                <!-- Cabecera -->
-                <p:layoutUnit position="north" size="70" resizable="false" closable="false" collapsible="false">
-                    <div class="header-bar">
-                        <div class="header-title">
-                            🐾 PetAdopt - Plataforma de Adopción
-                        </div>
-                        <div class="nav-buttons">
-                            <p:commandButton value="Iniciar Sesión" icon="pi pi-sign-in" action="/login.xhtml" rendered="#{!userSession.loggedIn}" />
-                            <p:commandButton value="Registrarse" icon="pi pi-user-plus" action="/register.xhtml" rendered="#{!userSession.loggedIn}" />
-                            <p:commandButton value="Cerrar Sesión" icon="pi pi-sign-out" action="#{userSession.logout}" rendered="#{userSession.loggedIn}" />
-                        </div>
-                    </div>
-                </p:layoutUnit>
+        <p:layout fullPage="true">
+            <!-- Cabecera -->
+            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                <h:form>
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <h2><h:outputText value="🐾 PetAdopt - Plataforma de Adopción" /></h2>
+                        </f:facet>
+                        <f:facet name="right">
+                            <h:panelGroup rendered="#{loginView.authenticatedUser != null}" layout="inline">
+                                <h:outputText value="Hola, #{loginView.authenticatedUser.nombre}" style="margin-right:10px; font-weight:bold;" />
+                                <p:commandButton value="Cerrar Sesión" icon="pi pi-sign-out" action="#{loginView.logout}" />
+                            </h:panelGroup>
+                        </f:facet>
+                    </p:toolbar>
+                </h:form>
+            </p:layoutUnit>
 
-                <!-- Menú lateral -->
-                <p:layoutUnit position="west" size="230" header="Navegación" collapsible="true">
+            <!-- Menú lateral -->
+            <p:layoutUnit position="west" size="230" header="Navegación" collapsible="true">
+                <h:form>
                     <p:menu styleClass="custom-menu">
+                        <p:menuitem value="Registrarse" icon="pi pi-user-plus" action="/sesion/registro.xhtml" rendered="#{request.isUserInRole('users') == false}" />
+                        <p:menuitem value="Iniciar Sesión" icon="pi pi-sign-in" action="/sesion/login.xhtml" rendered="#{request.isUserInRole('users') == false}" />
                         <p:menuitem value="Inicio" outcome="/index.xhtml" icon="pi pi-home" />
                         <p:menuitem value="Mascotas" action="verMascota" icon="pi pi-paw" />
-                        <p:menuitem value="Refugio" action="refugio/refugio.xhtml" icon="pi pi-users" />
-                        <p:menuitem value="Añadir Mascota" action="aniadirMascota/aniadirMascota.xhtml" icon="pi pi-users" />
-                        <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{userSession.admin}" />
+                        <p:menuitem value="Refugio" action="/refugio/refugio.xhtml" icon="pi pi-users" />
+                        <p:menuitem value="Añadir Mascota" action="/aniadirMascota/aniadirMascota.xhtml" icon="pi pi-users" />
+                        <p:menuitem value="Usuario" icon="pi pi-cog" rendered="#{request.isUserInRole('users')}" />
+                        <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{request.isUserInRole('admin')}" />
                     </p:menu>
-                </p:layoutUnit>
-
-                <!-- Contenido dinámico -->
-                <p:layoutUnit position="center">
-                    <div class="center-content">
-                        <ui:insert name="content"/>
-                    </div>
-                </p:layoutUnit>
-
-            </p:layout>
-        </h:form>
+                </h:form>
+            </p:layoutUnit>
+            <!-- Contenido dinámico -->
+            <p:layoutUnit position="center">
+                <div class="center-content">
+                    <ui:insert name="content"/>
+                </div>
+            </p:layoutUnit>
+        </p:layout>
     </h:body>
 
 </html>
