@@ -8,7 +8,9 @@ package com.mycompany.practicafinalpse.verMascota;
 import com.mycompany.practicafinalpse.entities.Mascota;
 import com.mycompany.practicafinalpse.rest.MascotaFacadeREST;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.flow.FlowScoped;
 import javax.inject.Named;
@@ -29,13 +31,44 @@ public class verMascota implements Serializable {
     private String imagenUrl;
     private String raza;
     private String descripcion;
-
+    
+    private String filtroNombre = "";
+    private String filtroEspecie = "";
+    private List<Mascota> mascotasFiltradas;
+    
     @PersistenceContext
     EntityManager em;
 
     @EJB
     private MascotaFacadeREST mascotaService;
 
+    @PostConstruct
+    public void init() {
+        aplicarFiltro(); // Inicializa con todos
+    }
+
+    public void aplicarFiltro() {
+        List<Mascota> todas = mascotaService.findAll();
+        mascotasFiltradas = new ArrayList<Mascota>();
+
+        for (Mascota m : todas) {
+            boolean coincideNombre = filtroNombre == null || filtroNombre.isEmpty()
+                    || m.getNombre().toLowerCase().contains(filtroNombre.toLowerCase());
+            boolean coincideEspecie = filtroEspecie == null || filtroEspecie.isEmpty()
+                    || m.getEspecie().toLowerCase().contains(filtroEspecie.toLowerCase());
+
+            if (coincideNombre && coincideEspecie) {
+                mascotasFiltradas.add(m);
+            }
+        }
+    }
+
+    public void limpiarFiltro() {
+        filtroNombre = "";
+        filtroEspecie = "";
+        aplicarFiltro();
+    }
+    
     public List<Mascota> getMascotas() {
         return mascotaService.findAll();
     }
@@ -85,6 +118,25 @@ public class verMascota implements Serializable {
 
     public void setMascotaService(MascotaFacadeREST mascotaService) {
         this.mascotaService = mascotaService;
+    }
+    public String getFiltroNombre() {
+        return filtroNombre;
+    }
+
+    public void setFiltroNombre(String filtroNombre) {
+        this.filtroNombre = filtroNombre;
+    }
+
+    public String getFiltroEspecie() {
+        return filtroEspecie;
+    }
+
+    public void setFiltroEspecie(String filtroEspecie) {
+        this.filtroEspecie = filtroEspecie;
+    }
+
+    public List<Mascota> getMascotasFiltradas() {
+        return mascotasFiltradas;
     }
 }
 

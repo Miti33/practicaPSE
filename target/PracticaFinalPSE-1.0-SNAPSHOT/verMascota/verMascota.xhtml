@@ -10,19 +10,44 @@
     <ui:composition template="./../WEB-INF/template.xhtml">
         <ui:define name="content">                
             <h:form id="formMascotas">
-                <h:panelGrid columns="3" cellpadding="10" style="margin:auto;">
-                    <ui:repeat value="#{verMascota.mascotas}" var="m">
-                        <p:panel header="#{m.nombre}" style="width:300px; text-align:center;">
-                            <h:graphicImage value="#{m.imagenUrl}" style="width:100%; height:200px; object-fit:cover;" />
-                            <h:outputText value="Edad: #{m.edad} años" style="display:block; margin-top:10px;" />
-                            <p:commandButton value="Ver Detalles"
-                                             action="detalles"
-                                             icon="pi pi-search">
-                                <f:setPropertyActionListener target="#{verMascota.mascotaId}" value="#{m.id}" />
-                            </p:commandButton>
-                        </p:panel>
-                    </ui:repeat>
-                </h:panelGrid>
+
+                <!-- Filtros -->
+                <p:panel header="Filtrar Mascotas" style="margin-bottom:20px;">
+                    <h:panelGrid columns="4" cellpadding="5">
+                        <h:outputLabel for="nombre" value="Nombre:" />
+                        <p:inputText id="nombre" value="#{verMascota.filtroNombre}">
+                            <p:ajax event="keyup" process="@this" update="listaMascotas" listener="#{verMascota.aplicarFiltro}" />
+                        </p:inputText>
+
+                        <h:outputLabel for="especie" value="Especie:" />
+                        <p:inputText id="especie" value="#{verMascota.filtroEspecie}">
+                            <p:ajax event="keyup" process="@this" update="listaMascotas" listener="#{verMascota.aplicarFiltro}" />
+                        </p:inputText>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Limpiar" icon="pi pi-times"
+                                     update="formMascotas"
+                                     actionListener="#{verMascota.limpiarFiltro}"
+                                     styleClass="p-button-secondary" />
+                </p:panel>
+
+                <!-- Resultados -->
+                <h:panelGroup id="listaMascotas">
+                    <h:panelGrid columns="3" cellpadding="10" style="margin:auto;">
+                        <ui:repeat value="#{verMascota.mascotasFiltradas}" var="m">
+                            <p:panel header="#{m.nombre}" style="width:300px; text-align:center;">
+                                <h:graphicImage value="#{m.imagenUrl}" style="width:100%; height:200px; object-fit:cover;" />
+                                <h:outputText value="Edad: #{m.edad} años" style="display:block; margin-top:10px;" />
+                                <p:commandButton value="Ver Detalles"
+                                                 action="detalles"
+                                                 icon="pi pi-search">
+                                    <f:setPropertyActionListener target="#{verMascota.mascotaId}" value="#{m.id}" />
+                                </p:commandButton>
+                            </p:panel>
+                        </ui:repeat>
+                    </h:panelGrid>
+                </h:panelGroup>
+
             </h:form>
         </ui:define>
     </ui:composition>
