@@ -34,14 +34,14 @@
             <p:layoutUnit position="west" size="230" header="Navegación" collapsible="true">
                 <h:form>
                     <p:menu styleClass="custom-menu">
-                        <p:menuitem value="Registrarse" icon="pi pi-user-plus" action="/sesion/registro.xhtml" rendered="#{request.isUserInRole('users') == false}" />
-                        <p:menuitem value="Iniciar Sesión" icon="pi pi-sign-in" action="/sesion/login.xhtml" rendered="#{request.isUserInRole('users') == false}" />
                         <p:menuitem value="Inicio" outcome="/index.xhtml" icon="pi pi-home" />
-                        <p:menuitem value="Mascotas" action="verMascota" icon="pi pi-paw" />
-                        <p:menuitem value="Refugio" action="/refugio/refugio.xhtml" icon="pi pi-users" />
-                        <p:menuitem value="Añadir Mascota" action="/aniadirMascota/aniadirMascota.xhtml" icon="pi pi-users" />
-                        <p:menuitem value="Usuario" icon="pi pi-cog" rendered="#{request.isUserInRole('users')}" />
-                        <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{request.isUserInRole('admin')}" />
+                        <p:menuitem value="Registrarse" icon="pi pi-user-plus" action="/sesion/registro.xhtml" rendered="#{loginView.user == false and loginView.refugio == false and loginView.admin == false}" />
+                        <p:menuitem value="Iniciar Sesión" icon="pi pi-sign-in" action="/sesion/login.xhtml" rendered="#{loginView.user == false and loginView.refugio == false and loginView.admin == false}" />
+                        <p:menuitem value="Mascotas" action="verMascota" icon="pi pi-paw" rendered="#{loginView.user}" />
+                        <p:menuitem value="Refugio" action="/refugio/refugio.xhtml" icon="pi pi-users" rendered="#{loginView.refugio}"/>
+                        <p:menuitem value="Añadir Mascota" action="/aniadirMascota/aniadirMascota.xhtml" icon="pi pi-users" rendered="#{loginView.refugio}" />
+                        <p:menuitem value="Usuario" icon="pi pi-cog" rendered="#{loginView.user}" />
+                        <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{loginView.admin}" />
                     </p:menu>
                 </h:form>
             </p:layoutUnit>

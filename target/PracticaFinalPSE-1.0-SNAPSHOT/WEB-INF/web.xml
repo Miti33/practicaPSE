@@ -36,6 +36,19 @@
     <security-role>
         <role-name>admin</role-name>
     </security-role>
+    <security-role>
+        <role-name>refugio</role-name>
+    </security-role>
+    <security-constraint>
+        <display-name>Restricted to refugio</display-name>
+        <web-resource-collection>
+            <web-resource-name>Restricted Access</web-resource-name>
+            <url-pattern>/faces/refugio/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>refugio</role-name>
+        </auth-constraint>
+    </security-constraint>
     <security-constraint>
         <display-name>Restricted to users</display-name>
         <web-resource-collection>

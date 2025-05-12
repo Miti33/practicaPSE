@@ -71,6 +71,7 @@ public class Refugio implements Serializable {
         this.cif = cif;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.autorizado = false;
     }
 
     public String getEmail() {

@@ -5,8 +5,11 @@
  */
 package com.mycompany.practicafinalpse.jaas;
 
+import com.mycompany.practicafinalpse.entities.Cliente;
+import com.mycompany.practicafinalpse.entities.Refugio;
 import com.mycompany.practicafinalpse.entities.UserGroups;
 import com.mycompany.practicafinalpse.entities.Usuario;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,11 +31,7 @@ public class UserEJB {
         } catch (Exception e) {
             throw new RuntimeException("Error codificando la contraseña", e);
         }
-        UserGroups group = new UserGroups();
-        group.setEmail(user.getEmail());
-        group.setGroupname("users");
         em.persist(user);
-        em.persist(group);
         return user;
     }
 
@@ -47,4 +46,33 @@ public class UserEJB {
         }
         return user;
     }
+    
+    public void insertCliente(String email, String apellidos, String nif, String domicilio, String telefono, Date fechaNacimiento) {
+        Cliente cliente = new Cliente();
+        cliente.setEmail(email);
+        cliente.setApellidos(apellidos);
+        cliente.setNif(nif);
+        cliente.setDomicilio(domicilio);
+        cliente.setTelefono(telefono);
+        cliente.setFechaNacimiento(fechaNacimiento);
+        em.persist(cliente);
+    }
+
+    public void insertRefugio(String email, String cif, String domicilio, String telefono) {
+        Refugio refugio = new Refugio();
+        refugio.setEmail(email);
+        refugio.setCif(cif);
+        refugio.setDomicilio(domicilio);
+        refugio.setTelefono(telefono);
+        refugio.setAutorizado(false);
+        em.persist(refugio);
+    }
+
+    public void addGroup(String email, String groupname) {
+        UserGroups group = new UserGroups();
+        group.setEmail(email);
+        group.setGroupname(groupname);
+        em.persist(group);
+    }
+
 }

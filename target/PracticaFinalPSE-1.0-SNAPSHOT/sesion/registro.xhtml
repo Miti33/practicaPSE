@@ -8,35 +8,101 @@
 
     <body>
         <ui:composition template="./../WEB-INF/template.xhtml">
-
             <ui:define name="content">
-                <h:form>
+
+                <h:form id="registroForm">
+                    <p:messages id="messages" closable="true" showDetail="true" />
+
                     <f:event listener="#{registerView.validatePassword}" type="postValidate" />
+
                     <p:panel header="Crear una nueva cuenta">
-                        <h:panelGrid id="grid" columns="3">
+                        <h:panelGrid columns="1" cellpadding="5" id="grid">
+
+                            <!-- Nombre -->
                             <h:outputLabel for="name" value="Nombre:" style="font-weight:bold" />
                             <p:inputText id="name" value="#{registerView.name}" required="true"
                                          requiredMessage="Por favor, introduce tu nombre." maxlength="30" />
                             <p:message for="name" />
+
+                            <!-- Email -->
                             <h:outputLabel for="email" value="E-Mail:" style="font-weight:bold" />
-                            <p:inputText id="email" value="#{registerView.email}" required="true" requiredMessage="Por favor, introduce tu email.">
+                            <p:inputText id="email" value="#{registerView.email}" required="true"
+                                         requiredMessage="Por favor, introduce tu email.">
                                 <f:validator validatorId="emailValidator" />
                             </p:inputText>
                             <p:message for="email" />
+
+                            <!-- Contraseña -->
                             <h:outputLabel for="password" value="Contraseña:" style="font-weight:bold" />
-                            <p:password id="password" value="#{registerView.password}" feedback="true" required="true" requiredMessage="Por favor, introduce tu contraseña." validatorMessage="La contraseña debe contener al menos un carácter en minúsculas, un carácter en mayúscula, un número y su longitud debe estar entre 6 y 20 caracteres.">
-                                <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})" />
+                            <p:password id="password" value="#{registerView.password}" feedback="true" required="true"
+                                        requiredMessage="Por favor, introduce tu contraseña."
+                                        validatorMessage="Debe contener al menos 1 mayúscula, 1 minúscula, 1 número, y entre 6 y 20 caracteres.">
                             </p:password>
                             <p:message for="password" />
-                            <h:outputLabel for="confirmpassword" value="Confirmar contraseña:" style="fontweight:bold" />
-                            <p:password id="confirmpassword" feedback="true"
-                                        value="#{registerView.confirmPassword}" required="true"
-                                        requiredMessage="Por favor, confirma tu contraseña." />
+
+                            <!-- Confirmar contraseña -->
+                            <h:outputLabel for="confirmpassword" value="Confirmar contraseña:" style="font-weight:bold" />
+                            <p:password id="confirmpassword" value="#{registerView.confirmPassword}" feedback="true"
+                                        required="true" requiredMessage="Por favor, confirma tu contraseña." />
                             <p:message for="confirmpassword" />
+
+                            <!-- Tipo de usuario -->
+                            <h:outputLabel for="tipo" value="Tipo de usuario:" style="font-weight:bold" />
+                            <p:selectOneMenu id="tipo" value="#{registerView.tipoUsuario}" required="true" style="width:200px">
+                                <f:selectItem itemLabel="Selecciona..." itemValue="" />
+                                <f:selectItem itemLabel="Cliente" itemValue="cliente" />
+                                <f:selectItem itemLabel="Refugio" itemValue="refugio" />
+                                <p:ajax update="registroForm" process="@this" />
+                            </p:selectOneMenu>
+                            <p:message for="tipo" />
                         </h:panelGrid>
-                        <p:commandButton action="#{registerView.register}" update="@form" ajax="false" value="Regístrate!" icon="ui-icon-pencil" />
+
+                        <!-- Campos Cliente -->
+                        <p:outputPanel id="clientePanel" rendered="#{registerView.tipoUsuario eq 'cliente'}" style="margin-top:20px;">
+                            <h3>Datos del Cliente</h3>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel value="Apellidos:" />
+                                <p:inputText value="#{registerView.apellidos}" required="true" />
+
+                                <h:outputLabel value="NIF:" />
+                                <p:inputText value="#{registerView.nif}" required="true" />
+
+                                <h:outputLabel value="Domicilio:" />
+                                <p:inputText value="#{registerView.domicilio}" required="true" />
+
+                                <h:outputLabel value="Teléfono:" />
+                                <p:inputText value="#{registerView.telefono}" required="true" />
+
+                                <h:outputLabel value="Fecha de nacimiento:" />
+                                <p:calendar value="#{registerView.fechaNacimiento}" pattern="dd/MM/yyyy" required="true" />
+                            </h:panelGrid>
+                        </p:outputPanel>
+
+                        <!-- Campos Refugio -->
+                        <p:outputPanel id="refugioPanel" rendered="#{registerView.tipoUsuario eq 'refugio'}" style="margin-top:20px;">
+                            <h3>Datos del Refugio</h3>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel value="CIF:" />
+                                <p:inputText value="#{registerView.cif}" required="true" />
+
+                                <h:outputLabel value="Domicilio:" />
+                                <p:inputText value="#{registerView.domicilio}" required="true" />
+
+                                <h:outputLabel value="Teléfono:" />
+                                <p:inputText value="#{registerView.telefono}" required="true" />
+
+                            </h:panelGrid>
+                        </p:outputPanel>
+
+                        <br />
+                        <p:commandButton action="#{registerView.register}"
+                                         value="Regístrate!"
+                                         icon="pi pi-user-plus"
+                                         ajax="false"
+                                         update="messages" />
                     </p:panel>
                 </h:form>
+
             </ui:define>
         </ui:composition>
     </body>

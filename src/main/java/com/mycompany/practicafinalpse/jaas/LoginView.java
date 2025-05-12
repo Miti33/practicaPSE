@@ -64,18 +64,23 @@ public class LoginView implements Serializable{
         try {
             request.login(email, password);
         } catch (ServletException e) {
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Loginincorrecto!", null));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Login incorrecto!", null));
             return "login";
         }
+
         this.user = userEJB.findByEmail(request.getUserPrincipal().getName());
+
         if (request.isUserInRole("users")) {
             return "/users/privatepage?faces-redirect=true";
+        } else if (request.isUserInRole("refugio")) {
+            return "/refugio/privatepage?faces-redirect=true";
         } else if (request.isUserInRole("admin")) {
             return "/admin/privatepage?faces-redirect=true";
         } else {
             return "login";
         }
     }
+
     
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -89,5 +94,24 @@ public class LoginView implements Serializable{
         }
         return "/index?faces-redirect=true";
     }
+    
+    public boolean isUser() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        return request.isUserInRole("users");
+    }
+
+    public boolean isRefugio() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        return request.isUserInRole("refugio");
+    }
+
+    public boolean isAdmin() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        return request.isUserInRole("admin");
+    }
+
     
 }
