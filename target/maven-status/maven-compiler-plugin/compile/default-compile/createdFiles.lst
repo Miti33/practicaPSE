@@ -1,5 +1,6 @@
 com\mycompany\practicafinalpse\entities\Mascota_.class
 com\mycompany\practicafinalpse\entities\UserGroups.class
+com\mycompany\practicafinalpse\chat\ChatServer.class
 com\mycompany\practicafinalpse\refugio\RefugioBean.class
 com\mycompany\practicafinalpse\rest\MascotaFacadeREST.class
 com\mycompany\practicafinalpse\entities\Usuario.class
