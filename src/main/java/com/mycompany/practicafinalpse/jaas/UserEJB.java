@@ -12,6 +12,7 @@ import com.mycompany.practicafinalpse.entities.Usuario;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -73,6 +74,38 @@ public class UserEJB {
         group.setEmail(email);
         group.setGroupname(groupname);
         em.persist(group);
+    }
+
+     public void deleteUser(Usuario user) {
+        Usuario managedUser = em.merge(user);
+
+        //Eliminar de user_groups por email
+        em.createQuery("DELETE FROM UserGroups ug WHERE ug.email = :email")
+                .setParameter("email", managedUser.getEmail())
+                .executeUpdate();
+
+        //Eliminar de cliente (si existe)
+        try {
+            Cliente cliente = em.createQuery("SELECT c FROM Cliente c WHERE c.email = :email", Cliente.class)
+                    .setParameter("email", managedUser.getEmail())
+                    .getSingleResult();
+            em.remove(cliente);
+        } catch (NoResultException e) {
+            // No es cliente
+        }
+
+        //Eliminar de refugio (si existe)
+        try {
+            Refugio refugio = em.createQuery("SELECT r FROM Refugio r WHERE r.email = :email", Refugio.class)
+                    .setParameter("email", managedUser.getEmail())
+                    .getSingleResult();
+            em.remove(refugio);
+        } catch (NoResultException e) {
+            // No es refugio
+        }
+
+        //Eliminar usuario
+        em.remove(managedUser);
     }
 
 }

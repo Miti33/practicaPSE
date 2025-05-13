@@ -112,6 +112,20 @@ public class LoginView implements Serializable{
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         return request.isUserInRole("admin");
     }
-
+    
+    public String deleteAccount() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        if (user != null) {
+            try {
+                userEJB.deleteUser(user); 
+                logout(); 
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cuenta eliminada correctamente.", null));
+                return "/index?faces-redirect=true";
+            } catch (Exception e) {
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error al eliminar la cuenta.", null));
+            }
+        }
+        return null;
+    }
     
 }

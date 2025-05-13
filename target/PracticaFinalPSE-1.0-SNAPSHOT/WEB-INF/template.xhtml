@@ -43,6 +43,7 @@
                         <p:menuitem value="Chat" outcome="/chat/chatroom.xhtml" icon="pi pi-users" rendered="#{loginView.user}"/>                        
                         <p:menuitem value="Usuario" icon="pi pi-cog" action="/users/privatepage.xhtml" rendered="#{loginView.user}" />
                         <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{loginView.admin}" />
+                        <p:menuitem value="Borrar Cuenta" icon="pi pi-trash" action="/sesion/borrarCuenta.xhtml" rendered="#{loginView.user or loginView.refugio}" />
                     </p:menu>
                 </h:form>
             </p:layoutUnit>
