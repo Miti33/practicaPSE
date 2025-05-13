@@ -40,7 +40,7 @@
                         <p:menuitem value="Mascotas" action="verMascota" icon="pi pi-paw" rendered="#{loginView.user}" />
                         <p:menuitem value="Refugio" action="/refugio/refugio.xhtml" icon="pi pi-users" rendered="#{loginView.refugio}"/>
                         <p:menuitem value="Añadir Mascota" action="/aniadirMascota/aniadirMascota.xhtml" icon="pi pi-users" rendered="#{loginView.refugio}" />
-                        <p:menuitem value="Usuario" icon="pi pi-cog" rendered="#{loginView.user}" />
+                        <p:menuitem value="Usuario" icon="pi pi-cog" action="/users/privatepage.xhtml" rendered="#{loginView.user}" />
                         <p:menuitem value="Administración" icon="pi pi-cog" rendered="#{loginView.admin}" />
                     </p:menu>
                 </h:form>
