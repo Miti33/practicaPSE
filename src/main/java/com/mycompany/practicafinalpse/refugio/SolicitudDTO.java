@@ -11,6 +11,7 @@ package com.mycompany.practicafinalpse.refugio;
  */
 public class SolicitudDTO {
     private int id;
+    private int idMascota;
     private String mascotaNombre;
     private String especie;
     private String clienteEmail;
@@ -22,6 +23,14 @@ public class SolicitudDTO {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+        public int getIdMascota() {
+        return idMascota;
+    }
+
+    public void setIdMascota(int idMascota) {
+        this.idMascota = idMascota;
     }
 
     public String getMascotaNombre() {

@@ -5,45 +5,54 @@
  */
 package com.mycompany.practicafinalpse.refugio;
 
+import com.mycompany.practicafinalpse.jaas.LoginView;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
  *
  * @author Vasil
  */
-@Named("refugioBean")
+@Named
 @ViewScoped
 public class RefugioBean implements Serializable {
+
+    @Inject
+    private SolicitudEJB solicitudEJB;
+
+    @Inject
+    private LoginView loginView;
 
     private List<SolicitudDTO> solicitudesPendientes;
 
     @PostConstruct
     public void init() {
-        //solicitudesPendientes = cargarSolicitudesPendientes();
-    }
-    /*
-    public List<SolicitudDTO> cargarSolicitudesPendientes() {
-        // Aquí llamas al servicio REST que devuelve las solicitudes con estado 'pendiente'
-        return RestClient.obtenerSolicitudesPorRefugioYEstado("pendiente");
+        String emailRefugio = loginView.getAuthenticatedUser().getEmail();
+        solicitudesPendientes = solicitudEJB.findSolicitudesPendientesPorRefugio(emailRefugio);
     }
 
-    public void aceptarSolicitud(int solicitudId) {
-        RestClient.actualizarEstadoSolicitud(solicitudId, "aceptada");
-        solicitudesPendientes = cargarSolicitudesPendientes();
+    public void aceptarSolicitud(int id, int idMascota) {
+        solicitudEJB.actualizarEstado(id,"Aceptada");
+        solicitudEJB.rechazarSolicitudesPorMascota(idMascota);
+        init();
     }
 
-    public void rechazarSolicitud(int solicitudId) {
-        RestClient.actualizarEstadoSolicitud(solicitudId, "rechazada");
-        solicitudesPendientes = cargarSolicitudesPendientes();
+    public void rechazarSolicitud(int id) {
+        solicitudEJB.actualizarEstado(id,"Rechazada");
+        init();
     }
 
     public List<SolicitudDTO> getSolicitudesPendientes() {
-        return solicitudesPendientes;
+    if (solicitudesPendientes == null && loginView.getAuthenticatedUser() != null) {
+        String emailRefugio = loginView.getAuthenticatedUser().getEmail();
+        solicitudesPendientes = solicitudEJB.findSolicitudesPendientesPorRefugio(emailRefugio);
     }
-    */
+    return solicitudesPendientes;
+}
+
 }
 

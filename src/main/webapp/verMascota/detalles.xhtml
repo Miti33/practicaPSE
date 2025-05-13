@@ -27,7 +27,7 @@
                     </div>
 
                     <div style="text-align:center; margin-top:2rem;">
-                        <p:commandButton value="Confirmar Adopción" action="confirmar" icon="pi pi-check" styleClass="p-button-success p-mr-2" />
+                        <p:commandButton value="Confirmar Adopción" action="#{solicitudFlow.confirmar(verMascota.mascotaId)}" icon="pi pi-check" styleClass="p-button-success p-mr-2" />
                         <p:commandButton value="Volver" action="verMascota" icon="pi pi-arrow-left" styleClass="p-button-secondary" immediate="true" />
                     </div>
                 </h:form>

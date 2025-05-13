@@ -23,6 +23,7 @@ com\mycompany\practicafinalpse\refugio\SolicitudDTO.class
 com\mycompany\practicafinalpse\rest\UsuarioFacadeREST.class
 com\mycompany\practicafinalpse\entities\Cliente_.class
 com\mycompany\practicafinalpse\entities\Solicitud_.class
+com\mycompany\practicafinalpse\refugio\SolicitudEJB.class
 com\mycompany\practicafinalpse\verMascota\verMascota.class
 com\mycompany\practicafinalpse\rest\ClienteFacadeREST.class
 com\mycompany\practicafinalpse\entities\Usuario_.class
@@ -30,3 +31,4 @@ com\mycompany\practicafinalpse\jaas\LoginView.class
 com\mycompany\practicafinalpse\rest\ApplicationConfig.class
 com\mycompany\practicafinalpse\jaas\RegisterView.class
 com\mycompany\practicafinalpse\entities\Refugio_.class
+com\mycompany\practicafinalpse\verMascota\SolicitudFlow.class

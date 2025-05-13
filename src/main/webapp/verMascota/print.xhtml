@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <h2 style="text-align:center;">Solicitud de Adopción Confirmada</h2>
+
+                    <p:panelGrid id="print" columns="1" style="margin:auto; width:60%;">
+                        <p:panelGrid columns="2">
+                            <h:outputText value="ID:" />
+                            <h:outputText value="#{solicitudFlow.solicitud.id}" />
+                            
+                            <h:outputText value="Mascota:" />
+                            <h:outputText value="#{solicitudFlow.mascota.nombre}" />
+
+                            <h:outputText value="Fecha:" />
+                            <h:outputText value="#{solicitudFlow.solicitud.fechaSolicitud}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+
+                            <h:outputText value="Cliente:" />
+                            <h:outputText value="#{solicitudFlow.solicitud.clienteEmail}" />
+
+                            <h:outputText value="Refugio:" />
+                            <h:outputText value="#{solicitudFlow.solicitud.refugioEmail}" />
+
+                            <h:outputText value="Estado:" />
+                            <h:outputText value="#{solicitudFlow.solicitud.estado}" />
+                        </p:panelGrid>
+
+                        <h3>Código QR con esta solicitud:</h3>
+                        <p:barcode value="#{solicitudFlow.qrText}" type="qr" />
+
+                        <p:commandButton value="Imprimir" type="button" icon="pi pi-print">
+                            <p:printer target="print" />
+                        </p:commandButton>
+
+                        <p:commandButton value="Volver a inicio" action="goHome" icon="pi pi-home" />
+                    </p:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

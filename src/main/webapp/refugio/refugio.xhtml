@@ -10,17 +10,20 @@
         <ui:composition template="./../WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h:form id="refugioForm">
-                    <!-- Título -->
-                    <h2>📋 Gestión de Refugio</h2>
-                    <h3>📥 Solicitudes de adopción pendientes</h3>
+                <h:form id="refugioForm" style="height:100%; display:flex; flex-direction:column;">
 
-                    <p:scrollPanel style="height:400px; margin-top:10px;">
+                    <!-- Título -->
+                    <h2 style="margin-bottom: 0.2rem;">📋 Gestión de Refugio</h2>
+                    <h3 style="margin-top: 0; color: #777;">📥 Solicitudes de adopción pendientes</h3>
+
+                    <!-- Contenedor scrollable -->
+                    <div style="flex:1; overflow-y: auto; padding: 1rem; border: 1px solid #ccc; background-color: #f9f9f9;">
                         <ui:repeat value="#{refugioBean.solicitudesPendientes}" var="solicitud">
-                            <p:panel header="Solicitud de #{solicitud.mascotaNombre}" style="margin-bottom:15px;">
-                                <h:panelGrid columns="2" cellpadding="5">
+                            <p:panel header="🐾 Solicitud de #{solicitud.mascotaNombre}" style="margin-bottom: 20px; background-color: #fff; border-radius: 5px;">
+                                <h:panelGrid columns="2" cellpadding="6" columnClasses="label,value" style="margin-bottom: 12px;">
                                     <h:outputText value="Mascota:" />
                                     <h:outputText value="#{solicitud.mascotaNombre}" />
+                                    <h:outputText value="#{solicitud.idMascota}" />
 
                                     <h:outputText value="Especie:" />
                                     <h:outputText value="#{solicitud.especie}" />
@@ -32,19 +35,30 @@
                                     <h:outputText value="#{solicitud.fechaSolicitud}" />
                                 </h:panelGrid>
 
-                                <p:commandButton value="Aceptar" icon="pi pi-check"
-                                                 action="#{refugioBean.aceptarSolicitud(solicitud.id)}"
-                                                 update="@form" styleClass="ui-button-success" />
+                                <!-- Botones -->
+                                <p:commandButton value="Aceptar"
+                                                 icon="pi pi-check"
+                                                 action="#{refugioBean.aceptarSolicitud(solicitud.id, solicitud.idMascota)}"
+                                                 update="@form"
+                                                 styleClass="ui-button-success"
+                                                 style="margin-right:1rem;" />
 
-                                <p:spacer width="10" />
-
-                                <p:commandButton value="Rechazar" icon="pi pi-times"
+                                <p:commandButton value="Rechazar"
+                                                 icon="pi pi-times"
                                                  action="#{refugioBean.rechazarSolicitud(solicitud.id)}"
-                                                 update="@form" styleClass="ui-button-danger" />
+                                                 update="@form"
+                                                 styleClass="ui-button-danger" />
                             </p:panel>
                         </ui:repeat>
-                    </p:scrollPanel>
+
+                        <h:panelGroup rendered="#{empty refugioBean.solicitudesPendientes}">
+                            <h:outputText value="No hay solicitudes pendientes por el momento."
+                                          style="color:gray; font-style:italic;" />
+                        </h:panelGroup>
+                    </div>
+
                 </h:form>
+
             </ui:define>
 
         </ui:composition>
