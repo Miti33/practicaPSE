@@ -10,7 +10,38 @@
         <ui:composition template="./WEB-INF/template.xhtml">
 
             <ui:define name="content">
-               
+                <h:form style="display: flex; align-items: center; justify-content: center; height: 100%;">
+                    <div style="max-width: 900px; width: 100%; display: flex; flex-wrap: wrap; background-color: #ffffffee; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden;">
+
+                        <!-- Imagen lateral -->
+                        <div style="flex: 1 1 50%; background: #f9f9f9; padding: 2rem; text-align: center;">
+                            <h:graphicImage value="/resources/img/inicio_img.jpg" alt="Mascotas" style="max-width: 40%; height: auto;" />
+                        </div>
+
+                        <!-- Texto y botones -->
+                        <div style="flex: 1 1 50%; padding: 2rem; display: flex; flex-direction: column; justify-content: center;">
+                            <h1 style="margin: 0 0 1rem 0; font-size: 2.5rem; color: #444;">🐾 ¡Bienvenido a PetAdopt!</h1>
+                            <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">
+                                Conecta con refugios, encuentra tu nuevo compañero y da una segunda oportunidad a una mascota que lo necesita.
+                            </p>
+
+                            <div style="display: flex; gap: 1rem;">
+                                <p:commandButton value="Iniciar Sesión"
+                                                 icon="pi pi-sign-in"
+                                                 action="/sesion/login.xhtml"
+                                                 styleClass="ui-button-primary"
+                                                 rendered="#{loginView.user == false and loginView.refugio == false and loginView.admin == false}"/>
+
+                                <p:commandButton value="Registrarse"
+                                                 icon="pi pi-user-plus"
+                                                 action="/sesion/registro.xhtml"
+                                                 styleClass="ui-button-success"
+                                                 rendered="#{loginView.user == false and loginView.refugio == false and loginView.admin == false}"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </h:form>
             </ui:define>
 
         </ui:composition>
