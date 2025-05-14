@@ -60,4 +60,21 @@ public class SolicitudFlow implements Serializable {
     public String getQrText() {
         return "ID Solicitud: " + solicitud.getId();
     }
+    
+    public boolean getPuedeConfirmar() {
+        if (mascota == null || loginView.getAuthenticatedUser() == null) {
+            return false;
+        }
+
+        String emailCliente = loginView.getAuthenticatedUser().getEmail();
+
+        Long conteo = em.createQuery(
+                "SELECT COUNT(s) FROM Solicitud s WHERE s.mascotaId = :mascotaId AND s.clienteEmail = :email", Long.class)
+                .setParameter("mascotaId", mascota.getId()) // Asegúrate que la mascota esté seteada
+                .setParameter("email", emailCliente)
+                .getSingleResult();
+
+        return conteo == 0; // Solo permite confirmar si NO ha hecho solicitud
+    }
+
 }
