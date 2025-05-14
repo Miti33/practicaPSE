@@ -5,11 +5,8 @@
  */
 package com.mycompany.practicafinalpse.refugio;
 
-import com.mycompany.practicafinalpse.entities.Mascota;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
