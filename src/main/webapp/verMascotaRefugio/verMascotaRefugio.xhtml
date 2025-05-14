@@ -6,11 +6,11 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <body>
+ 
 
         <ui:composition template="./../WEB-INF/template.xhtml">
-            <h:form id="formMascotas">
-                <ui:define name="content">
+            <ui:define name="content">                
+                <h:form id="formMascotas">
                     <h:panelGroup id="listaMascotas">
                         <h:panelGrid columns="3" cellpadding="10" style="margin:auto;">
                             <ui:repeat value="#{verMascotaRefugio.mascotasRefugio}" var="m">
@@ -21,9 +21,9 @@
                             </ui:repeat>
                         </h:panelGrid>
                     </h:panelGroup>
-                </ui:define>
-            </h:form>
+                </h:form>
+            </ui:define>
         </ui:composition>
 
-    </body>
+ 
 </html>
