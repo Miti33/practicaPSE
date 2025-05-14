@@ -32,7 +32,7 @@ public class MascotaBean implements Serializable {
     private double costeAdopcion;
     private String descripcion;
     private String imagenUrl;
-    private String email = "refugio2@gmail.com";
+    private String email;
 
     public MascotaService getMascotaService() {
         return mascotaService;

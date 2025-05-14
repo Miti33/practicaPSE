@@ -11,6 +11,7 @@ package com.mycompany.practicafinalpse.refugio;
  */
 
 import com.mycompany.practicafinalpse.entities.Mascota;
+import com.mycompany.practicafinalpse.jaas.LoginView;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.RequestScoped;
@@ -30,9 +31,13 @@ public class MascotaClientBean {
 
     @Inject
     MascotaBean bean;
+    @Inject
+    private LoginView loginView;
+
 
     Client client;
     WebTarget target;
+    
 
     @PostConstruct
     public void init() {
@@ -55,8 +60,7 @@ public class MascotaClientBean {
         mascota.setCosteAdopcion(bean.getCosteAdopcion());
         mascota.setDescripcion(bean.getDescripcion());
         mascota.setImagenUrl(bean.getImagenUrl());
-        mascota.setEmail(bean.getEmail());
-
+        mascota.setEmail(loginView.getAuthenticatedUser().getEmail());
         target.request().post(Entity.entity(mascota, MediaType.APPLICATION_JSON));
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Éxito", "Mascota añadida correctamente"));
     }
