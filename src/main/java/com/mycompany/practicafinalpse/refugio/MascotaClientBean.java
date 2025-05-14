@@ -42,7 +42,7 @@ public class MascotaClientBean {
     @PostConstruct
     public void init() {
         client = ClientBuilder.newClient();
-        target = client.target("http://localhost:8080/PracticaFinalPSE/webresources/com.mycompany.practicafinalpse.entities.mascota");
+        target = client.target("http://localhost:8080/practicaPSE/webresources/com.mycompany.practicafinalpse.entities.mascota");
     }
 
     @PreDestroy

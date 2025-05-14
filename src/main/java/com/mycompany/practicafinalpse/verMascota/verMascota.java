@@ -6,6 +6,7 @@
 package com.mycompany.practicafinalpse.verMascota;
 
 import com.mycompany.practicafinalpse.entities.Mascota;
+import com.mycompany.practicafinalpse.jaas.LoginView;
 import com.mycompany.practicafinalpse.rest.MascotaFacadeREST;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class verMascota implements Serializable {
     private String filtroNombre = "";
     private String filtroEspecie = "";
     private List<Mascota> mascotasFiltradas;
+    private LoginView loginView;
     
     @PersistenceContext
     EntityManager em;
@@ -138,5 +140,23 @@ public class verMascota implements Serializable {
     public List<Mascota> getMascotasFiltradas() {
         return mascotasFiltradas;
     }
+    
+    public List<Mascota> getMascotasRefugio() {
+        String emailRefugio = loginView.getAuthenticatedUser().getEmail();
+
+        List<Mascota> todas = mascotaService.findAll();
+        List<Mascota> mascotasRefugio = new ArrayList<>();
+
+        for (Mascota m : todas) {
+            if (m.getEmail() != null && m.getEmail().equals(emailRefugio)) {
+                System.out.println(m.getNombre());
+                mascotasRefugio.add(m);
+            }
+        }
+        
+
+        return mascotasRefugio;
+    }
+
 }
 
