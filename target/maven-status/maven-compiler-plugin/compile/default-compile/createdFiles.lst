@@ -19,6 +19,7 @@ com\mycompany\practicafinalpse\rest\RefugioFacadeREST.class
 com\mycompany\practicafinalpse\entities\Solicitud.class
 com\mycompany\practicafinalpse\refugio\MascotaClientBean.class
 com\mycompany\practicafinalpse\jaas\UserEJB.class
+com\mycompany\practicafinalpse\verMascota\VerMascotaRefugio.class
 com\mycompany\practicafinalpse\refugio\SolicitudDTO.class
 com\mycompany\practicafinalpse\rest\UsuarioFacadeREST.class
 com\mycompany\practicafinalpse\entities\Cliente_.class
