@@ -71,7 +71,7 @@ public class SolicitudFlow implements Serializable {
         String emailCliente = loginView.getAuthenticatedUser().getEmail();
 
         Long conteo = em.createQuery(
-                "SELECT COUNT(s) FROM Solicitud s WHERE s.mascotaId = :mascotaId AND s.clienteEmail = :email", Long.class)
+                "SELECT COUNT(s) FROM Solicitud s WHERE s.mascotaId = :mascotaId AND s.clienteEmail = :email ", Long.class)
                 .setParameter("mascotaId", mascotaId)
                 .setParameter("email", emailCliente)
                 .getSingleResult();

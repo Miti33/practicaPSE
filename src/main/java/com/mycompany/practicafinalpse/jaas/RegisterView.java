@@ -63,21 +63,35 @@ public class RegisterView implements Serializable {
             facesContext.renderResponse();
         }
     }
-
+    
     public String register() {
-        Usuario user = new Usuario(email, password, name);
-        userEJB.createUser(user);
-
-        if ("cliente".equals(tipoUsuario)) {
-            userEJB.insertCliente(email, apellidos, nif, domicilio, telefono, fechaNacimiento);
-            userEJB.addGroup(email, "users");
-        } else if ("refugio".equals(tipoUsuario)) {
-            userEJB.insertRefugio(email, cif, domicilio, telefono);
-            userEJB.addGroup(email, "refugio");
+        if (userEJB.findByEmail(email) != null) {
+            FacesContext.getCurrentInstance().addMessage("registroForm:email",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe un usuario con este email", null));
+            return null;
         }
+        try {
+            Usuario user = new Usuario(email, password, name);
+            userEJB.createUser(user);
 
-        return "regok?faces-redirect=true";
+            if ("cliente".equals(tipoUsuario)) {
+                userEJB.insertCliente(email, apellidos, nif, domicilio, telefono, fechaNacimiento);
+                userEJB.addGroup(email, "users");
+            } else if ("refugio".equals(tipoUsuario)) {
+                userEJB.insertRefugio(email, cif, domicilio, telefono);
+                userEJB.addGroup(email, "refugio");
+            }
+
+            return "regok?faces-redirect=true";
+
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error inesperado", "No se pudo completar el registro."));
+            e.printStackTrace();
+            return null;
+        }
     }
+
 
     public UserEJB getUserEJB() {
         return userEJB;
