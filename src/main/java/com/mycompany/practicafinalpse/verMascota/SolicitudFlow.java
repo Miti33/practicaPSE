@@ -18,7 +18,7 @@ import java.util.Date;
 public class SolicitudFlow implements Serializable {
 
     private Solicitud solicitud;
-    
+
     private Mascota mascota;
 
     @Inject
@@ -37,7 +37,9 @@ public class SolicitudFlow implements Serializable {
 
     public String confirmar(int mascotaId) {
         mascota = em.find(Mascota.class, mascotaId);
-        if (mascota == null) return "error";
+        if (mascota == null) {
+            return "error";
+        }
 
         solicitud.setMascotaId(mascotaId);
         solicitud.setClienteEmail(loginView.getAuthenticatedUser().getEmail());
@@ -52,17 +54,17 @@ public class SolicitudFlow implements Serializable {
     public Solicitud getSolicitud() {
         return solicitud;
     }
-    
-    public Mascota getMascota(){
+
+    public Mascota getMascota() {
         return mascota;
-    } 
+    }
 
     public String getQrText() {
         return "ID Solicitud: " + solicitud.getId();
     }
-    
-    public boolean getPuedeConfirmar() {
-        if (mascota == null || loginView.getAuthenticatedUser() == null) {
+
+    public boolean getPuedeConfirmar(int mascotaId) {
+        if (loginView.getAuthenticatedUser() == null) {
             return false;
         }
 
@@ -70,11 +72,11 @@ public class SolicitudFlow implements Serializable {
 
         Long conteo = em.createQuery(
                 "SELECT COUNT(s) FROM Solicitud s WHERE s.mascotaId = :mascotaId AND s.clienteEmail = :email", Long.class)
-                .setParameter("mascotaId", mascota.getId()) // Asegúrate que la mascota esté seteada
+                .setParameter("mascotaId", mascotaId)
                 .setParameter("email", emailCliente)
                 .getSingleResult();
 
-        return conteo == 0; // Solo permite confirmar si NO ha hecho solicitud
+        return conteo == 0;
     }
 
 }
