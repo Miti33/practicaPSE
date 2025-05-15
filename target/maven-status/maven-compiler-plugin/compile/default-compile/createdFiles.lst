@@ -7,10 +7,12 @@ com\mycompany\practicafinalpse\entities\Usuario.class
 com\mycompany\practicafinalpse\entities\Mascota.class
 com\mycompany\practicafinalpse\entities\Cliente.class
 com\mycompany\practicafinalpse\jaas\EmailValidator.class
+com\mycompany\practicafinalpse\verMascotaRefugio\VerMascotaRefugio.class
 com\mycompany\practicafinalpse\entities\Refugio.class
 com\mycompany\practicafinalpse\refugio\RestClient.class
 com\mycompany\practicafinalpse\entities\UserGroups_.class
 com\mycompany\practicafinalpse\rest\SolicitudFacadeREST.class
+com\mycompany\practicafinalpse\verMascotaRefugio\MascotaClientService.class
 com\mycompany\practicafinalpse\jaas\AuthenticationUtils.class
 com\mycompany\practicafinalpse\refugio\MascotaService.class
 com\mycompany\practicafinalpse\refugio\MascotaBean.class
@@ -19,7 +21,6 @@ com\mycompany\practicafinalpse\rest\RefugioFacadeREST.class
 com\mycompany\practicafinalpse\entities\Solicitud.class
 com\mycompany\practicafinalpse\refugio\MascotaClientBean.class
 com\mycompany\practicafinalpse\jaas\UserEJB.class
-com\mycompany\practicafinalpse\verMascota\VerMascotaRefugio.class
 com\mycompany\practicafinalpse\refugio\SolicitudDTO.class
 com\mycompany\practicafinalpse\rest\UsuarioFacadeREST.class
 com\mycompany\practicafinalpse\entities\Cliente_.class

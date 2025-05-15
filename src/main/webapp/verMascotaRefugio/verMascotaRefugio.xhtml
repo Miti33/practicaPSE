@@ -3,27 +3,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:p="http://primefaces.org/ui">
 
- 
 
-        <ui:composition template="./../WEB-INF/template.xhtml">
-            <ui:define name="content">                
-                <h:form id="formMascotas">
-                    <h:panelGroup id="listaMascotas">
-                        <h:panelGrid columns="3" cellpadding="10" style="margin:auto;">
-                            <ui:repeat value="#{verMascotaRefugio.mascotasRefugio}" var="m">
-                                <p:panel header="#{m.nombre}" style="width:300px; text-align:center;">
-                                    <h:graphicImage value="#{m.imagenUrl}" style="width:100%; height:200px; object-fit:cover;" />
-                                    <h:outputText value="Edad: #{m.edad} años" style="display:block; margin-top:10px;" />
-                                </p:panel>
-                            </ui:repeat>
+
+    <ui:composition template="./../WEB-INF/template.xhtml">
+        <ui:define name="content">                
+            <h:form id="formMascotas">
+                <p:messages id="msgs" closable="true" showDetail="true" />
+
+                <ui:repeat value="#{verMascotaRefugio.mascotasRefugio}" var="m">
+                    <p:panel header="🐾 #{m.nombre}" style="margin-bottom:1.5rem; background-color:#fdfdfd; border-radius:8px;">
+                        <h:panelGrid columns="2" columnClasses="label,value" cellpadding="5" style="width:100%;">
+
+                            <h:outputLabel value="Imagen:" />
+                            <h:graphicImage value="#{m.imagenUrl}" style="width:180px; height:180px; object-fit:cover; border-radius:6px;" />
+
+                            <h:outputLabel value="Especie:" />
+                            <p:inputText value="#{m.especie}" style="width:100%;" />
+
+                            <h:outputLabel value="Edad:" />
+                            <p:spinner value="#{m.edad}" min="0" style="width:100px;" />
+
+                            <h:outputLabel value="Estado de salud:" />
+                            <p:inputTextarea value="#{m.estadoSalud}" autoResize="true" style="width:100%;" />
+
+                            <h:outputLabel value="Descripción:" />
+                            <p:inputTextarea value="#{m.descripcion}" autoResize="true" style="width:100%;" />
+
+                            <h:outputLabel value="Coste de adopción (€):" />
+                            <p:inputNumber value="#{m.costeAdopcion}" symbol=" €" minValue="0" decimalPlaces="2" style="width:100%;" />
+
                         </h:panelGrid>
-                    </h:panelGroup>
-                </h:form>
-            </ui:define>
-        </ui:composition>
 
- 
+                        <!-- Botones -->
+                        <div style="margin-top:1rem; text-align:right;">
+                            <p:commandButton value="Guardar cambios"
+                                             action="#{verMascotaRefugio.guardarCambios(m)}"
+                                             update="formMascotas"
+                                             icon="pi pi-save"
+                                             styleClass="ui-button-success"
+                                             style="margin-right:1rem;" />
+
+                            <p:commandButton value="Eliminar"
+                                             action="#{verMascotaRefugio.eliminarMascota(m.id)}"
+                                             update="formMascotas"
+                                             icon="pi pi-trash"
+                                             styleClass="ui-button-danger"
+                                             onclick="return confirm('¿Eliminar esta mascota?');" />
+                        </div>
+                    </p:panel>
+                </ui:repeat>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+
 </html>
