@@ -36,23 +36,23 @@ public class RefugioBean implements Serializable {
     }
 
     public void aceptarSolicitud(int id, int idMascota) {
-        solicitudEJB.actualizarEstado(id,"Aceptada");
+        solicitudEJB.actualizarEstado(id, "Aceptada");
         solicitudEJB.rechazarSolicitudesPorMascota(idMascota);
         init();
     }
 
     public void rechazarSolicitud(int id) {
-        solicitudEJB.actualizarEstado(id,"Rechazada");
+        solicitudEJB.actualizarEstado(id, "Rechazada");
         init();
     }
 
     public List<SolicitudDTO> getSolicitudesPendientes() {
-    if (solicitudesPendientes == null && loginView.getAuthenticatedUser() != null) {
-        String emailRefugio = loginView.getAuthenticatedUser().getEmail();
-        solicitudesPendientes = solicitudEJB.findSolicitudesPendientesPorRefugio(emailRefugio);
+        if (solicitudesPendientes == null && loginView.getAuthenticatedUser() != null) {
+            String emailRefugio = loginView.getAuthenticatedUser().getEmail();
+            solicitudesPendientes = solicitudEJB.findSolicitudesPendientesPorRefugio(emailRefugio);
+        }
+        return solicitudesPendientes;
     }
-    return solicitudesPendientes;
-}
 
 }
 

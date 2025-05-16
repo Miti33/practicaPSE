@@ -5,7 +5,9 @@
  */
 package com.mycompany.practicafinalpse.jaas;
 
+import com.mycompany.practicafinalpse.entities.Refugio;
 import com.mycompany.practicafinalpse.entities.Usuario;
+import com.mycompany.practicafinalpse.refugio.RefugioService;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -29,6 +31,8 @@ public class LoginView implements Serializable{
     private String email;
     private String password;
     private Usuario user;
+    @Inject
+    private RefugioService refugioService;
 
     public UserEJB getUserEJB() {
         return userEJB;
@@ -65,7 +69,7 @@ public class LoginView implements Serializable{
             request.login(email, password);
         } catch (ServletException e) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Login incorrecto!", null));
-            return "login";
+            return null;
         }
 
         this.user = userEJB.findByEmail(request.getUserPrincipal().getName());
@@ -73,7 +77,16 @@ public class LoginView implements Serializable{
         if (request.isUserInRole("users")) {
             return "/users/privatepage?faces-redirect=true";
         } else if (request.isUserInRole("refugio")) {
-            return "/refugio/privatepage?faces-redirect=true";
+            System.out.println("Aqui 1");
+            if (refugioService.isRefugioAutorizado(user.getEmail())) {
+                System.out.println("Aqui 2");
+                return "/refugio/privatepage?faces-redirect=true";
+            } else {
+                System.out.println("Aqui 3");
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Tu refugio aun no esta autorizado", null));
+                logout();
+                return null;
+            }
         } else if (request.isUserInRole("admin")) {
             return "/admin/privatepage?faces-redirect=true";
         } else {

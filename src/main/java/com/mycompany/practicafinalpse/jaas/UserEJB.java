@@ -10,6 +10,7 @@ import com.mycompany.practicafinalpse.entities.Refugio;
 import com.mycompany.practicafinalpse.entities.UserGroups;
 import com.mycompany.practicafinalpse.entities.Usuario;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -48,6 +49,11 @@ public class UserEJB {
         return user;
     }
     
+    public List<Refugio> findRefugiosPendientes() {
+        return em.createQuery("SELECT r FROM Refugio r WHERE r.autorizado = false", Refugio.class)
+                 .getResultList();
+    }
+    
     public void insertCliente(String email, String apellidos, String nif, String domicilio, String telefono, Date fechaNacimiento) {
         Cliente cliente = new Cliente();
         cliente.setEmail(email);
@@ -83,6 +89,10 @@ public class UserEJB {
         em.createQuery("DELETE FROM UserGroups ug WHERE ug.email = :email")
                 .setParameter("email", managedUser.getEmail())
                 .executeUpdate();
+        
+        em.createQuery("DELETE FROM Usuario u WHERE u.email = :email")
+                .setParameter("email", managedUser.getEmail())
+                .executeUpdate();
 
         //Eliminar de cliente (si existe)
         try {
@@ -106,6 +116,26 @@ public class UserEJB {
 
         //Eliminar usuario
         em.remove(managedUser);
+    }
+     
+    public void validateRefugio(String email) {
+        Refugio refugio = em.find(Refugio.class, email);
+        if (refugio != null) {
+            refugio.setAutorizado(true);
+            em.merge(refugio);
+        }
+    }
+    
+    public void rejectRefugio(String email) {
+        Refugio refugio = em.find(Refugio.class, email);
+        Usuario usuario = em.find(Usuario.class, email);
+        UserGroups user_groups = em.find(UserGroups.class, email);
+
+        if (refugio != null) {
+            em.remove(refugio);
+            em.remove(usuario);
+            em.remove(user_groups);
+        }
     }
 
 }
