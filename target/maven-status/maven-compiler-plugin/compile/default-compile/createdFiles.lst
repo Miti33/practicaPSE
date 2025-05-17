@@ -34,5 +34,6 @@ com\mycompany\practicafinalpse\entities\Usuario_.class
 com\mycompany\practicafinalpse\jaas\LoginView.class
 com\mycompany\practicafinalpse\rest\ApplicationConfig.class
 com\mycompany\practicafinalpse\jaas\RegisterView.class
+com\mycompany\practicafinalpse\jaas\BlacklistClient.class
 com\mycompany\practicafinalpse\entities\Refugio_.class
 com\mycompany\practicafinalpse\verMascota\SolicitudFlow.class

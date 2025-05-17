@@ -49,7 +49,6 @@ public class VerMascotaRefugio implements Serializable {
     }
 
     public List<Mascota> getMascotasRefugio() {
-        System.out.println("Aqui");
         if (mascotasRefugio == null && loginView.getAuthenticatedUser() != null) {
             String emailRefugio = loginView.getAuthenticatedUser().getEmail();
             List<Mascota> todasMascotas = mascotaService.findAll();

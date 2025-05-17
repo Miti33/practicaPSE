@@ -19,6 +19,9 @@ public class RegisterView implements Serializable {
     @Inject
     private UserEJB userEJB;
 
+    @Inject
+    private BlacklistClient blacklistClient;
+
     private String name;
     private String email;
     private String password;
@@ -65,11 +68,19 @@ public class RegisterView implements Serializable {
     }
     
     public String register() {
+        
+        if (blacklistClient.estaEnListaNegra(email)) {
+            FacesContext.getCurrentInstance().addMessage("registroForm:email",
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este correo no puede registrarse: está en la lista negra.", null));
+            return null;
+        }
+        
         if (userEJB.findByEmail(email) != null) {
             FacesContext.getCurrentInstance().addMessage("registroForm:email",
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe un usuario con este email", null));
             return null;
         }
+        
         try {
             Usuario user = new Usuario(email, password, name);
             userEJB.createUser(user);
