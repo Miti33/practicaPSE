@@ -8,11 +8,9 @@
     <body>
 
         <ui:composition template="./../WEB-INF/template.xhtml">
-
             <ui:define name="content">
                 <h:form id="formSolicitudes">
-                    <h2>📄 Mis Solicitudes</h2>
-
+                    <h2>📄 Mis Solicitudes de Adopción</h2>
                     <p:messages closable="true" />
 
                     <p:dataTable value="#{misSolicitudesBean.solicitudes}" var="s" rows="10" paginator="true" styleClass="table">
@@ -26,19 +24,18 @@
                         </p:column>
 
                         <p:column headerText="Estado">
-                            <h:outputText value="#{s.estado}" />
+                            <h:outputText value="#{s.estado}" styleClass="estado-#{s.estado.toUpperCase()}" />
                         </p:column>
 
-                        <p:column headerText="Acción" style="width:150px;">
+                        <p:column headerText="Acciones" style="width:140px;">
                             <p:commandButton value="Eliminar"
-                                             icon="pi pi-times"
+                                             icon="pi pi-trash"
                                              action="#{misSolicitudesBean.eliminarSolicitud(s.id)}"
                                              update="@form"
                                              rendered="#{s.estado eq 'Pendiente'}"
                                              styleClass="ui-button-danger"
                                              onclick="return confirm('¿Eliminar esta solicitud?');" />
                         </p:column>
-
                     </p:dataTable>
                 </h:form>
             </ui:define>
