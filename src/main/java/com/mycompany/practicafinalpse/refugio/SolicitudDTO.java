@@ -27,7 +27,7 @@ public class SolicitudDTO {
         this.id = id;
     }
     
-        public int getIdMascota() {
+    public int getIdMascota() {
         return idMascota;
     }
 
