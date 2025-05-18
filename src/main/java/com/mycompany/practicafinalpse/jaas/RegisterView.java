@@ -67,14 +67,7 @@ public class RegisterView implements Serializable {
         }
     }
     
-    public String register() {
-        
-        if (blacklistClient.estaEnListaNegra(email)) {
-            FacesContext.getCurrentInstance().addMessage("registroForm:email",
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Este correo no puede registrarse: está en la lista negra.", null));
-            return null;
-        }
-        
+    public String register() { 
         if (userEJB.findByEmail(email) != null) {
             FacesContext.getCurrentInstance().addMessage("registroForm:email",
                     new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ya existe un usuario con este email", null));

@@ -12,6 +12,7 @@ C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\myc
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\entities\Solicitud.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\jaas\RegisterView.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\entities\Refugio.java
+C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\admin\AdminUsuariosBean.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\refugio\SolicitudEJB.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\refugio\RefugioBean.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\rest\RefugioFacadeREST.java
@@ -22,6 +23,7 @@ C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\myc
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\refugio\RestClient.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\verMascota\verMascota.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\jaas\UserEJB.java
+C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\verMascota\MisSolicitudesBean.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\verMascotaRefugio\MascotaClientService.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\verMascotaRefugio\VerMascotaRefugio.java
 C:\Users\Vasil\Documents\NetBeansProjects\PracticaFinalPSE\src\main\java\com\mycompany\practicafinalpse\refugio\SolicitudDTO.java

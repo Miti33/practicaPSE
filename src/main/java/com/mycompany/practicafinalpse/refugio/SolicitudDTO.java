@@ -16,7 +16,9 @@ public class SolicitudDTO {
     private String especie;
     private String clienteEmail;
     private String fechaSolicitud;
-
+    private String estado;
+    private boolean enlistaNegra;
+    
     public int getId() {
         return id;
     }
@@ -64,4 +66,21 @@ public class SolicitudDTO {
     public void setFechaSolicitud(String fechaSolicitud) {
         this.fechaSolicitud = fechaSolicitud;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public boolean isEnlistaNegra() {
+        return enlistaNegra;
+    }
+
+    public void setEnlistaNegra(boolean enlistaNegra) {
+        this.enlistaNegra = enlistaNegra;
+    }
+    
 }

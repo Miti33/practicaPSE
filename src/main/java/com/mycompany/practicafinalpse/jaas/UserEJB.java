@@ -48,12 +48,12 @@ public class UserEJB {
         }
         return user;
     }
-    
+
     public List<Refugio> findRefugiosPendientes() {
         return em.createQuery("SELECT r FROM Refugio r WHERE r.autorizado = false", Refugio.class)
-                 .getResultList();
+                .getResultList();
     }
-    
+
     public void insertCliente(String email, String apellidos, String nif, String domicilio, String telefono, Date fechaNacimiento) {
         Cliente cliente = new Cliente();
         cliente.setEmail(email);
@@ -82,14 +82,14 @@ public class UserEJB {
         em.persist(group);
     }
 
-     public void deleteUser(Usuario user) {
+    public void deleteUser(Usuario user) {
         Usuario managedUser = em.merge(user);
 
         //Eliminar de user_groups por email
         em.createQuery("DELETE FROM UserGroups ug WHERE ug.email = :email")
                 .setParameter("email", managedUser.getEmail())
                 .executeUpdate();
-        
+
         em.createQuery("DELETE FROM Usuario u WHERE u.email = :email")
                 .setParameter("email", managedUser.getEmail())
                 .executeUpdate();
@@ -117,7 +117,7 @@ public class UserEJB {
         //Eliminar usuario
         em.remove(managedUser);
     }
-     
+
     public void validateRefugio(String email) {
         Refugio refugio = em.find(Refugio.class, email);
         if (refugio != null) {
@@ -125,7 +125,7 @@ public class UserEJB {
             em.merge(refugio);
         }
     }
-    
+
     public void rejectRefugio(String email) {
         Refugio refugio = em.find(Refugio.class, email);
         Usuario usuario = em.find(Usuario.class, email);
@@ -135,6 +135,47 @@ public class UserEJB {
             em.remove(refugio);
             em.remove(usuario);
             em.remove(user_groups);
+        }
+    }
+
+    public List<Usuario> findAllUsuarios() {
+        return em.createNamedQuery("Usuario.findAll", Usuario.class).getResultList();
+    }
+
+    public void eliminarUsuarioAdmin(String email) {
+        em.createQuery("DELETE FROM Solicitud s WHERE s.clienteEmail = :email OR s.refugioEmail = :email")
+                .setParameter("email", email)
+                .executeUpdate();
+
+        em.createQuery("DELETE FROM Mascota m WHERE m.email = :email")
+                .setParameter("email", email)
+                .executeUpdate();
+
+        em.createQuery("DELETE FROM Cliente c WHERE c.email = :email")
+                .setParameter("email", email)
+                .executeUpdate();
+
+        em.createQuery("DELETE FROM Refugio r WHERE r.email = :email")
+                .setParameter("email", email)
+                .executeUpdate();
+
+        em.createQuery("DELETE FROM UserGroups g WHERE g.email = :email")
+                .setParameter("email", email)
+                .executeUpdate();
+
+        Usuario u = em.find(Usuario.class, email);
+        if (u != null) {
+            em.remove(u);
+        }
+    }
+
+    public String getGrupoPorEmail(String email) {
+        try {
+            return em.createQuery("SELECT g.groupname FROM UserGroups g WHERE g.email = :email", String.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return "sin grupo";
         }
     }
 

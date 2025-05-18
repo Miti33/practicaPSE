@@ -33,6 +33,9 @@
 
                                     <h:outputText value="Fecha de solicitud:" />
                                     <h:outputText value="#{solicitud.fechaSolicitud}" />
+                                    
+                                    <h:outputText value="⚠️ Lista negra:" rendered="#{solicitud.enlistaNegra}" />
+                                    <h:outputText value="Este usuario está en la lista negra" style="color:red;" rendered="#{solicitud.enlistaNegra}" />
                                 </h:panelGrid>
 
                                 <!-- Botones -->
@@ -40,6 +43,7 @@
                                                  icon="pi pi-check"
                                                  action="#{refugioBean.aceptarSolicitud(solicitud.id, solicitud.idMascota)}"
                                                  update="@form"
+                                                 rendered="#{not solicitud.enlistaNegra}"
                                                  styleClass="ui-button-success"
                                                  style="margin-right:1rem;" />
 
