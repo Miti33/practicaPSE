@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.practicafinalpse.refugio;
 
 import com.mycompany.practicafinalpse.jaas.LoginView;
@@ -13,10 +8,6 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-/**
- *
- * @author Vasil
- */
 @Named
 @ViewScoped
 public class RefugioBean implements Serializable {

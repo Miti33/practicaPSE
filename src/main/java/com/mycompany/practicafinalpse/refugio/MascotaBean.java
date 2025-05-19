@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.practicafinalpse.refugio;
 
 import java.io.Serializable;
@@ -10,19 +5,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-/**
- *
- * @author Vasil
- */
 @Named("mascotaBean")
 @ViewScoped
 public class MascotaBean implements Serializable {
 
     @Inject
     private MascotaService mascotaService;
-
-    //@Inject
-    //private UserSession userSession;
 
     private String nombre;
     private String especie;

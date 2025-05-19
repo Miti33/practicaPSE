@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 var wsUri = 'ws://' + document.location.host + document.location.pathname.substr(0, document.location.pathname.indexOf("/faces")) + '/websocket';
 console.log(wsUri);
 var websocket = new WebSocket(wsUri); //Inicializa el websocket

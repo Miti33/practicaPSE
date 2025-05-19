@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.practicafinalpse.refugio;
 
-/**
- *
- * @author Vasil
- */
 import com.mycompany.practicafinalpse.entities.Mascota;
 import com.mycompany.practicafinalpse.entities.Solicitud;
 import com.mycompany.practicafinalpse.jaas.BlacklistClient;
